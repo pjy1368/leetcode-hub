@@ -18,33 +18,27 @@ class Solution {
     private boolean answer = true;
 
     public boolean isBalanced(TreeNode root) {
-        if (root == null) {
-            return true;
-        }
-
-        recurse(root);
-        return answer;
+        return checkHeight(root) >= 0;
     }
 
-    private void recurse(TreeNode node) {
-        if (node == null) {
-            return;
-        }
-
-        if (Math.abs(calculateHeight(node.left) - calculateHeight(node.right)) > 1) {
-            answer = false;
-            return;
-        }
-
-        recurse(node.left);
-        recurse(node.right);
-    }
-
-    private int calculateHeight(TreeNode node) {
+    private int checkHeight(TreeNode node) {
         if (node == null) {
             return 0;
         }
 
-        return Math.max(calculateHeight(node.left), calculateHeight(node.right)) + 1;
+        int leftHeight = checkHeight(node.left);
+        if (leftHeight == -1) {
+            return -1;
+        }
+
+        int rightHeight = checkHeight(node.right);
+        if (rightHeight == -1) {
+            return -1;
+        }
+
+        if (Math.abs(leftHeight - rightHeight) > 1) {
+            return -1;
+        }
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 }
