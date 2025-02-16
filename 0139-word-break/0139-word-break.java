@@ -33,8 +33,7 @@ class Solution {
             }
 
             if (isSame) {
-                if (idx + word.length() == s.length() || 
-                    recursive(idx + word.length(), s, wordDict)) {
+                if (recursive(idx + word.length(), s, wordDict)) {
                     dp[idx] = true;
                     break;
                 }
