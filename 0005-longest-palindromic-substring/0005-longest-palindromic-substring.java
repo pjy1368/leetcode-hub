@@ -9,23 +9,18 @@ class Solution {
 
                 if (len == 1) {
                     dp[i][j] = true;
-                    if (answer.length() < len) {
-                        answer = s.substring(i, j + 1);
-                    }
                 } else if (len == 2) {
                     if (s.charAt(i) == s.charAt(j)) {
                         dp[i][j] = true;
-                        if (answer.length() < len) {
-                            answer = s.substring(i, j + 1);
-                        }
                     }
                 } else {
                     if (s.charAt(i) == s.charAt(j) && dp[i + 1][j - 1]) {
                         dp[i][j] = true;
-                        if (answer.length() < len) {
-                            answer = s.substring(i, j + 1);
-                        }
                     }
+                }
+
+                if (dp[i][j] && answer.length() < len) {
+                    answer = s.substring(i, j + 1);
                 }
             }
         }
